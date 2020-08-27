@@ -1,0 +1,71 @@
+Middleware
+	consist diff microservices
+		AccountService
+		AdminService
+		UserService
+		GatewayService
+===========================
+Context class
+nuget packages
+	Microsoft.EntityFrameworkCore
+	Microsoft.EntityFrameworkCore.SqlServer
+	
+services.AddDbContext<AdminContextDB>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("SqlConnectionString")));
+
+config file	
+  "ConnectionStrings": {
+    "SqlConnectionString": "Server=SANGANESHL\\MSSQLSERVER01;Database=StockMarketDB;Trusted_Connection=True;MultipleActiveResultSets=true"
+  },
+
+nuget
+	Microsoft.EntityFrameworkCore.Tools
+
+PM console > Add-Migration CreateContext
+PM console > Update-Database
+
+--------------------------
+Angular (client)
+	client side validation
+^
+|
+|
+server side/mid tier (web service / API/microservice)
+Entities - models
+MVC (Controller)
+	Action
+		server side validation
+Repository (DAL)
+	Entity framework DBContext
+SQL server (database)
+---------------------------------
+Repositories folder
+	IUploadRepository
+	UploadRepository
+		constructor
+			inject context as dependency
+	nuget package
+		System.Data.OleDb
+		
+Project
+	create folder
+		UploadFiles
+====================================
+register repository as dependency
+3 ways
+	Transient objects are always different; a new instance is provided to every controller and every service.
+
+	Scoped objects are the same within a request, but different across different requests.
+
+	Singleton objects are the same for every object and every request.
+	
+	services.AddScoped<IUploadRepository, UploadRepository>();
+=============================
+HTTP post from Postman with body parameters as x-www-form-urlencoded
+	public void Post([FromForm] string value)
+=================================
+JWT
+https://www.c-sharpcorner.com/article/jwt-json-web-token-authentication-in-asp-net-core/
+
+Ocelot
+https://docs.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/implement-api-gateways-with-ocelot#implementing-your-api-gateways-with-ocelot
