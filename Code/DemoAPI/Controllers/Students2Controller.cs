@@ -27,7 +27,7 @@ namespace DemoAPI.Controllers
             return repository.Get();
         }
 
-        [HttpGet("/api/student2/searchbydate")]
+        [HttpGet("/api/students2/searchbydate")]
         public IEnumerable<Student> Get(DateTime from, DateTime to)
         {
             return repository.Search(from, to);
@@ -57,7 +57,7 @@ namespace DemoAPI.Controllers
 
         // PUT api/<Students2Controller>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Student student)
+        public IActionResult Put(int id, [FromForm] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -69,7 +69,7 @@ namespace DemoAPI.Controllers
                     {
                         return NotFound();
                     }
-
+                    
                     var isUpdated = repository.Update(student);
                     if (isUpdated)
                     {
