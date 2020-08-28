@@ -27,7 +27,7 @@ namespace DemoAPI.Controllers
             return repository.Get();
         }
 
-        [HttpGet("/api/students2/searchbydate")]
+        [HttpGet("searchbydate")]
         public IEnumerable<Student> Get(DateTime from, DateTime to)
         {
             return repository.Search(from, to);
