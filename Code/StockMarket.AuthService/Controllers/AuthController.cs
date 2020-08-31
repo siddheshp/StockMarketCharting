@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using StckMarket.Models;
 using StockMarket.AuthService.Repositories;
 
@@ -53,10 +54,11 @@ namespace StockMarket.AuthService.Controllers
         }
 
         // GET api/<AuthController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("logout")]
+        public IActionResult Get()
         {
-            return "value";
+            repository.Logout();
+            return Ok("loged out");
         }
 
         // POST api/<AuthController>

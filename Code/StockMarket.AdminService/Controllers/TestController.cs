@@ -20,7 +20,7 @@ namespace StockMarket.AdminService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class TestController : ControllerBase
     {
         private IUploadRepository repository;

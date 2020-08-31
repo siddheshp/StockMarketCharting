@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 
 namespace StockMarket.ApiGateway
 {
@@ -47,7 +49,7 @@ namespace StockMarket.ApiGateway
             {
                 endpoints.MapControllers();
             });
-            app.UseOcelot();
+            app.UseOcelot().Wait();
         }
     }
 }

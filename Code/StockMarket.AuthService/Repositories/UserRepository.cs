@@ -77,7 +77,8 @@ namespace StockMarket.AuthService.Repositories
 
         public bool Logout()
         {
-            throw new NotImplementedException();
+            //cancel token
+            return true;
         }
 
         public bool Signup(User entity)
