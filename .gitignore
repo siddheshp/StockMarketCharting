@@ -8,3 +8,6 @@
 /Code/StckMarket.Models/obj
 /Code/StockMarket.AdminService/bin/Debug/netcoreapp3.1
 /Code/StockMarket.AdminService/obj
+/Code/StockMarket.ApiGateway/obj
+/Code/StockMarket.AuthService/bin/Debug/netcoreapp3.1
+/Code/StockMarket.AuthService/obj

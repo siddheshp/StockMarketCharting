@@ -19,6 +19,15 @@ namespace StockMarket.AdminService.Repositories
         {
             this.context = dbContext;
         }
+
+        public object GetMatchingCompanies(string companyName)
+        {
+            var companies = context.Companies
+                            .Where(c => c.CompayName.Contains(companyName))
+                            .Select(c=> c.CompayName);
+            return companyName;
+        }
+
         public void UploadExcel(string filePath)
         {
             var list = new List<StockPrice>();

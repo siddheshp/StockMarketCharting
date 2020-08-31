@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -19,6 +20,7 @@ namespace StockMarket.AdminService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class TestController : ControllerBase
     {
         private IUploadRepository repository;
@@ -53,6 +55,13 @@ namespace StockMarket.AdminService.Controllers
             }
         }
 
+        //[HttpGet]
+        //public void GetMatchingCompanies(string companyName)
+        //{
+        //    var companies = repository.GetMatchingCompanies(companyName);
+        //    //return companyName;
+        //}
+
         // PUT api/<TestController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromForm] string value)
@@ -65,7 +74,7 @@ namespace StockMarket.AdminService.Controllers
         {
         }
 
-        [HttpPost("/api/test/upload")]
+        [HttpPost("upload")]
         public IActionResult Upload([FromForm]IFormFile file1)
         {
             if (file1 == null)
@@ -76,17 +85,17 @@ namespace StockMarket.AdminService.Controllers
 
             try
             {
-                var file = Request.Form.Files[0];
+                //var file = Request.Form.Files[0];
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), "UploadFiles");
-                if (file.Length > 0)
+                if (file1.Length > 0)
                 {
-                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    var fileName = ContentDispositionHeaderValue.Parse(file1.ContentDisposition).FileName.Trim('"');
                     var fullPath = Path.Combine(pathToSave, fileName);
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
-                        file.CopyTo(stream);
-                        repository.UploadExcel(fullPath);
+                        file1.CopyTo(stream);
                     }
+                    repository.UploadExcel(fullPath);
                     return Ok("Upload successful");
                 }
                 else

@@ -12,15 +12,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.Data.OleDb" Version="4.7.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\StckMarket.Models\StckMarket.Models.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="UploadFiles\" />
   </ItemGroup>
 
 

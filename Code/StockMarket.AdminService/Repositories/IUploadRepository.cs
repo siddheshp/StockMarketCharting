@@ -8,5 +8,6 @@ namespace StockMarket.AdminService.Repositories
     public interface IUploadRepository
     {
         void UploadExcel(string filePath);
+        object GetMatchingCompanies(string companyName);
     }
 }
