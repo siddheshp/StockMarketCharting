@@ -9,7 +9,7 @@ using StockMarket.AdminService.Models;
 
 namespace StockMarket.AdminService.Migrations
 {
-    [DbContext(typeof(AdminContextDB))]
+    [DbContext(typeof(AdminContext))]
     [Migration("20200826121054_createContext")]
     partial class createContext
     {

@@ -10,8 +10,8 @@ using StockMarket.AdminService.Models;
 namespace StockMarket.AdminService.Migrations
 {
     [DbContext(typeof(AdminContext))]
-    [Migration("20200826144555_v2")]
-    partial class v2
+    [Migration("20200901052757_Updatedrelationship")]
+    partial class Updatedrelationship
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,14 +31,24 @@ namespace StockMarket.AdminService.Migrations
                     b.Property<string>("CompayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StockExchangeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("StockExchangeId");
-
                     b.ToTable("Companies");
+                });
+
+            modelBuilder.Entity("StckMarket.Models.CompanyStockExchange", b =>
+                {
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StockExchangeCode")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CompanyId", "StockExchangeCode");
+
+                    b.HasIndex("StockExchangeCode");
+
+                    b.ToTable("CompanyStockExchanges");
                 });
 
             modelBuilder.Entity("StckMarket.Models.IPODetail", b =>
@@ -54,6 +64,9 @@ namespace StockMarket.AdminService.Migrations
                     b.Property<decimal>("PricePerShare")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("StockExchangeCode")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("StockExchangeId")
                         .HasColumnType("int");
 
@@ -62,23 +75,22 @@ namespace StockMarket.AdminService.Migrations
                     b.HasIndex("CompanyId")
                         .IsUnique();
 
-                    b.HasIndex("StockExchangeId")
-                        .IsUnique();
+                    b.HasIndex("StockExchangeCode")
+                        .IsUnique()
+                        .HasFilter("[StockExchangeCode] IS NOT NULL");
 
                     b.ToTable("IPODetails");
                 });
 
             modelBuilder.Entity("StckMarket.Models.StockExchange", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Code");
 
                     b.ToTable("StockExchanges");
                 });
@@ -90,11 +102,11 @@ namespace StockMarket.AdminService.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CompanyCodeId")
+                    b.Property<int?>("CompanyStockExchangeCompanyId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CompanyId")
-                        .HasColumnType("int");
+                    b.Property<string>("CompanyStockExchangeStockExchangeCode")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("CurrentPrice")
                         .HasColumnType("decimal(18,2)");
@@ -102,29 +114,29 @@ namespace StockMarket.AdminService.Migrations
                     b.Property<string>("Date")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StockExchangeId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("StockExchangeId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("Time")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
-
-                    b.HasIndex("StockExchangeId1");
+                    b.HasIndex("CompanyStockExchangeCompanyId", "CompanyStockExchangeStockExchangeCode");
 
                     b.ToTable("StockPrices");
                 });
 
-            modelBuilder.Entity("StckMarket.Models.Company", b =>
+            modelBuilder.Entity("StckMarket.Models.CompanyStockExchange", b =>
                 {
+                    b.HasOne("StckMarket.Models.Company", "Company")
+                        .WithMany("CompanyStockExchanges")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("StckMarket.Models.StockExchange", "StockExchange")
-                        .WithMany("Companies")
-                        .HasForeignKey("StockExchangeId");
+                        .WithMany("CompanyStockExchanges")
+                        .HasForeignKey("StockExchangeCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("StckMarket.Models.IPODetail", b =>
@@ -137,20 +149,14 @@ namespace StockMarket.AdminService.Migrations
 
                     b.HasOne("StckMarket.Models.StockExchange", "StockExchange")
                         .WithOne("IPODetail")
-                        .HasForeignKey("StckMarket.Models.IPODetail", "StockExchangeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StckMarket.Models.IPODetail", "StockExchangeCode");
                 });
 
             modelBuilder.Entity("StckMarket.Models.StockPrice", b =>
                 {
-                    b.HasOne("StckMarket.Models.Company", "Company")
-                        .WithMany("StockPrices")
-                        .HasForeignKey("CompanyId");
-
-                    b.HasOne("StckMarket.Models.StockExchange", "StockExchange")
-                        .WithMany("StockPrices")
-                        .HasForeignKey("StockExchangeId1");
+                    b.HasOne("StckMarket.Models.CompanyStockExchange", "CompanyStockExchange")
+                        .WithMany()
+                        .HasForeignKey("CompanyStockExchangeCompanyId", "CompanyStockExchangeStockExchangeCode");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200901044555_CompanyStockExchangeMapping.cs" />
+    <Compile Remove="Migrations\20200901044555_CompanyStockExchangeMapping.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
@@ -17,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StckMarket.Models\StckMarket.Models.csproj" />
+    <ProjectReference Include="..\StockMarket.Dtos\StockMarket.Dtos.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -13,9 +13,9 @@ namespace StockMarket.AdminService.Repositories
 {
     public class UploadRepository : IUploadRepository
     {
-        private AdminContextDB context;
+        private AdminContext context;
 
-        public UploadRepository(AdminContextDB dbContext)
+        public UploadRepository(AdminContext dbContext)
         {
             this.context = dbContext;
         }
@@ -76,8 +76,8 @@ namespace StockMarket.AdminService.Repositories
                             list.Add(
                                 new StockPrice()
                                 {
-                                    CompanyId = int.Parse(r[0].ToString().Trim()),
-                                    StockExchangeId = int.Parse(r[1].ToString().Trim()),
+                                    //CompanyId = int.Parse(r[0].ToString().Trim()),
+                                    //StockExchangeId = int.Parse(r[1].ToString().Trim()),
                                     CurrentPrice = Convert.ToDecimal(r[2].ToString().Trim()),
                                     Date = r[3].ToString().Trim(),
                                     Time = r[4].ToString().Trim()

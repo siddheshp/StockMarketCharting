@@ -12,3 +12,7 @@
 /Code/StockMarket.AuthService/bin/Debug/netcoreapp3.1
 /Code/StockMarket.AuthService/obj
 /Code/StockMarket.ApiGateway/bin/Debug/netcoreapp3.1
+/Code/NUnitTests.Unit/bin/Debug/netcoreapp3.1
+/Code/NUnitTests.Unit/obj
+/Code/StockMarket.Dtos/bin/Debug/netcoreapp3.1
+/Code/StockMarket.Dtos/obj

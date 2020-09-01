@@ -17,6 +17,7 @@ using StockMarket.AdminService.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using StockMarket.Dtos;
 
 namespace StockMarket.AdminService
 {
@@ -33,10 +34,11 @@ namespace StockMarket.AdminService
         // register dependencies which can be injected via DI
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AdminContextDB>(options =>
+            services.AddDbContext<AdminContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SqlConnectionString")));
             services.AddControllers();
             services.AddScoped<IUploadRepository, UploadRepository>();
+            services.AddScoped<IRepository<StockPriceDto>, StockpriceRepository>();
             //services.AddScoped<IRepository, UploadRepository>();
             //services.AddOcelot(Configuration);
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

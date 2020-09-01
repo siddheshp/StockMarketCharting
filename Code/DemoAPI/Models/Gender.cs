@@ -1,4 +1,4 @@
-﻿namespace DemoAPI
+﻿namespace DemoAPI.Models
 {
     public enum Gender
     {

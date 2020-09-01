@@ -12,5 +12,6 @@ namespace StckMarket.Models
         public int StockExchangeId { get; set; }
         public virtual Company Company { get; set; }
         public virtual StockExchange StockExchange { get; set; }
+        public String StockExchangeCode { get; set; }
     } 
 }
