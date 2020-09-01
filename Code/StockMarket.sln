@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUnitTests.Unit", "NUnitTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockMarket.Dtos", "StockMarket.Dtos\StockMarket.Dtos.csproj", "{BFCFAA2F-B9E6-4C78-99D0-B806229372FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockMarket.Tests.Unit", "StockMarket.Tests.Unit\StockMarket.Tests.Unit.csproj", "{ADC862BF-3F30-4497-9A81-ACE112043209}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{BFCFAA2F-B9E6-4C78-99D0-B806229372FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFCFAA2F-B9E6-4C78-99D0-B806229372FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFCFAA2F-B9E6-4C78-99D0-B806229372FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADC862BF-3F30-4497-9A81-ACE112043209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADC862BF-3F30-4497-9A81-ACE112043209}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADC862BF-3F30-4497-9A81-ACE112043209}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADC862BF-3F30-4497-9A81-ACE112043209}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

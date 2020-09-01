@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using StckMarket.Models;
@@ -98,6 +99,16 @@ namespace StockMarket.AuthService.Repositories
             {
                 return false;
             }
+        }
+
+        public User GetProfile(string token)
+        {
+            return context.Users.FirstOrDefault(u => u.Email == token);
+        }
+
+        public bool UpdateProfile(User entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

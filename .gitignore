@@ -16,3 +16,5 @@
 /Code/NUnitTests.Unit/obj
 /Code/StockMarket.Dtos/bin/Debug/netcoreapp3.1
 /Code/StockMarket.Dtos/obj
+/Code/StockMarket.Tests.Unit/bin/Debug/netcoreapp3.1
+/Code/StockMarket.Tests.Unit/obj

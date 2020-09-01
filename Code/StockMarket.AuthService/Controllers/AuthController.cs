@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using StckMarket.Models;
@@ -78,6 +81,17 @@ namespace StockMarket.AuthService.Controllers
                 return StatusCode(500, "Internal server error");
             }
             return BadRequest(ModelState);
+        }
+
+        [HttpGet("profile")]
+        [Authorize]
+        public IActionResult GetProfile()
+        {
+            var currentUser = HttpContext.User;
+            //TODO
+            var email = currentUser.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub).Value;
+            var result = repository.GetProfile(email);
+            return Ok(result);
         }
     }
 }

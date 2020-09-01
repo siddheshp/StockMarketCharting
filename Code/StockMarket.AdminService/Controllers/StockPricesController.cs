@@ -23,9 +23,9 @@ namespace StockMarket.AdminService.Controllers
         }
         // GET: api/<StockPricesController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<StockPriceDto> Get()
         {
-            return new string[] { "value1", "value2" };
+            return repository.Get();
         }
 
         // GET api/<StockPricesController>/5

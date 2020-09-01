@@ -33,7 +33,6 @@
       ],
       "UpstreamPathTemplate": "/adminservice/{url}"
     },
-
     {
       "DownstreamPathTemplate": "/api/test",
       "DownstreamScheme": "https",
