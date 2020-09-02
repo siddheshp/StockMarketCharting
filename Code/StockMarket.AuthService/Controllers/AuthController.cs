@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using StckMarket.Models;
 using StockMarket.AuthService.Repositories;
+using StockMarket.Dtos;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -39,7 +40,12 @@ namespace StockMarket.AuthService.Controllers
                     // success -> token
                     if (result.Item1)
                     {
-                        return Ok(result.Item2); //token
+                        var loginDto = new LoginDto
+                        {
+                            Token = result.Item2,
+                            UserType = result.Item3
+                        };
+                        return Ok(loginDto);
                     }
                     // fail -> 
                     // invalid credentials

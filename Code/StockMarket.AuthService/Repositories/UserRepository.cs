@@ -24,21 +24,21 @@ namespace StockMarket.AuthService.Repositories
             this.context = context;
             this.configuration = configuration;
         }
-        public Tuple<bool, string> Login(string username, string password)
+        public Tuple<bool, string, UserType> Login(string username, string password)
         {
             try
             {
-                Tuple<bool, string> result;
+                Tuple<bool, string, UserType> result;
                 var user = context.Users.FirstOrDefault(u => u.Username == username
                             && u.Password == password && u.Confirmed);
                 if (user == null)
                 {
-                    result = new Tuple<bool, string>(false, "");
+                    result = new Tuple<bool, string, UserType>(false, "", UserType.User);
                 }
                 else
                 {
                     var token = GenerateJwtToken(user);
-                    result = new Tuple<bool, string>(true, token);
+                    result = new Tuple<bool, string, UserType>(true, token, user.UserType);
                 }
                 return result;
             }

@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StckMarket.Models\StckMarket.Models.csproj" />
+    <ProjectReference Include="..\StockMarket.Dtos\StockMarket.Dtos.csproj" />
   </ItemGroup>
 
 
