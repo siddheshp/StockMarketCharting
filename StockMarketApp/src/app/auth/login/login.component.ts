@@ -1,4 +1,4 @@
-import { UserType } from './../../models/login-model';
+import { UserType, LoginModel } from './../../models/login-model';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -22,11 +22,8 @@ export class LoginComponent implements OnInit {
     // call service method, pass params
     this.authService.login(this.username, this.password).subscribe(result => {
       //1. store token and user in localstorage
-      console.log(result);
-      //debugger;
-      
-      localStorage.setItem('token', result.Token);
-      //localStorage.setItem('role', result.UserType);
+      localStorage.setItem('token', result["token"]);
+      localStorage.setItem('role', result["userType"]);
       //2. navigate to admin/user
       alert('login successful');
     }, err => {
